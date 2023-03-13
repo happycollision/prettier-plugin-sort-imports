@@ -39,15 +39,8 @@ export const getSortedNodes: GetSortedNodes = (nodes, options) => {
         {},
     );
 
-    const importOrderWithOutThirdPartyPlaceholder = importOrder.filter(
-        (group) => group !== THIRD_PARTY_MODULES_SPECIAL_WORD,
-    );
-
     for (const node of originalNodes) {
-        const matchedGroup = getImportNodesMatchedGroup(
-            node,
-            importOrderWithOutThirdPartyPlaceholder,
-        );
+        const matchedGroup = getImportNodesMatchedGroup(node, importOrder);
         importOrderGroups[matchedGroup].push(node);
     }
 
