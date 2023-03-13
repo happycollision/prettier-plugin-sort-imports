@@ -52,15 +52,20 @@ export const getSortedNodes: GetSortedNodes = (nodes, options) => {
         importOrderGroups[matchedGroup].push(node);
     }
 
-    for (const [group, thisGroupName, nextGroupName] of zip(
+    let latestMatchedGroup = '';
+
+    for (const [group, thisGroupName] of zip(
         importOrder,
         importOrderSeparationGroups,
-        importOrderSeparationGroups.slice(1),
     )) {
         if (!group) continue;
         const groupNodes = importOrderGroups[group];
 
         if (groupNodes.length === 0) continue;
+
+        if (latestMatchedGroup === '') {
+            latestMatchedGroup = thisGroupName as string;
+        }
 
         const sortedInsideGroup = getSortedNodesGroup(groupNodes, {
             importOrderGroupNamespaceSpecifiers,
@@ -73,16 +78,15 @@ export const getSortedNodes: GetSortedNodes = (nodes, options) => {
             );
         }
 
-        finalNodes.push(...sortedInsideGroup);
-
-        if (importOrderSeparation) {
-            if (thisGroupName !== nextGroupName) {
-                finalNodes.push(newLineNode);
-            }
+        if (importOrderSeparation && latestMatchedGroup !== thisGroupName) {
+            latestMatchedGroup = thisGroupName as string;
+            finalNodes.push(newLineNode);
         }
+
+        finalNodes.push(...sortedInsideGroup);
     }
 
-    if (finalNodes.length > 0 && !importOrderSeparation) {
+    if (finalNodes.length > 0) {
         // a newline after all imports
         finalNodes.push(newLineNode);
     }
