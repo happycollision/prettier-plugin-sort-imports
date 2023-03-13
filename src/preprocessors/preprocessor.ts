@@ -13,6 +13,7 @@ export function preprocessor(code: string, options: PrettierOptions) {
         importOrder,
         importOrderCaseInsensitive,
         importOrderSeparation,
+        importOrderSeparationGroups,
         importOrderGroupNamespaceSpecifiers,
         importOrderSortSpecifiers,
     } = options;
@@ -38,6 +39,7 @@ export function preprocessor(code: string, options: PrettierOptions) {
         importOrder,
         importOrderCaseInsensitive,
         importOrderSeparation,
+        importOrderSeparationGroups,
         importOrderGroupNamespaceSpecifiers,
         importOrderSortSpecifiers,
     });

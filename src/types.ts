@@ -17,6 +17,7 @@ export type GetSortedNodes = (
         | 'importOrder'
         | 'importOrderCaseInsensitive'
         | 'importOrderSeparation'
+        | 'importOrderSeparationGroups'
         | 'importOrderGroupNamespaceSpecifiers'
         | 'importOrderSortSpecifiers'
     >,

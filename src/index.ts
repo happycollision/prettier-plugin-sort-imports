@@ -1,7 +1,7 @@
 import { parsers as babelParsers } from 'prettier/parser-babel';
 import { parsers as flowParsers } from 'prettier/parser-flow';
-import { parsers as typescriptParsers } from 'prettier/parser-typescript';
 import { parsers as htmlParsers } from 'prettier/parser-html';
+import { parsers as typescriptParsers } from 'prettier/parser-typescript';
 
 import { defaultPreprocessor } from './preprocessors/default-processor';
 import { vuePreprocessor } from './preprocessors/vue-preprocessor';
@@ -34,6 +34,14 @@ const options = {
         category: 'Global',
         default: false,
         description: 'Should imports be separated by new line?',
+    },
+    importOrderSeparationGroups: {
+        type: 'path',
+        category: 'Global',
+        array: true,
+        default: [{ value: [] }],
+        description:
+            'Specify groups like ["A","A","A", "B","B"] to separate with a new line only on grouping changes.',
     },
     importOrderGroupNamespaceSpecifiers: {
         type: 'boolean',

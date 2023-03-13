@@ -31,6 +31,21 @@ export interface PluginConfig {
     importOrderSeparation?: boolean;
 
     /**
+     * An array of strings that allows you to control which groups have new lines separating them, and which do not.
+     *
+     * If you set `importOrderSeparation` to `true` and you choose to supply this array as well, it will create new lines only between group names that change.
+     *
+     * ```
+     * "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"]
+     * "importOrderSeparation": true,
+     * "importOrderSeparationGroups": "core", "serverAndUi", "serverAndUi", "relative",
+     * ```
+     *
+     * In the example above, there will be no new line between imports that match `^@server/(.*)$` or `^@ui/(.*)$`, since the corresponding name for each of those regular expressions are both `"serverAndUi"`.
+     */
+    importOrderSeparationGroups?: string[];
+
+    /**
      * A boolean value to enable or disable sorting of the specifiers in an import declarations.
      *
      * @default false

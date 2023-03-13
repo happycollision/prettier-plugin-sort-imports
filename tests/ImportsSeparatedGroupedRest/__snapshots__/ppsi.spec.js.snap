@@ -25,9 +25,7 @@ function add(a:number,b:number) {
 import otherthing from "@core/otherthing";
 
 import something from "@server/something";
-
 import component from "@ui/hello";
-
 import a from "a";
 import c from "c";
 import thirdParty from "third-party";
@@ -141,10 +139,8 @@ import otherthing from "@core/otherthing";
 
 import qwerty from "@server/qwerty";
 import something from "@server/something";
-
 import component from "@ui/hello";
 import xyz from "@ui/xyz";
-
 import thirdParty from "third-party";
 import z from "z";
 
@@ -200,9 +196,7 @@ function add(a:number,b:number) {
 import otherthing from "@core/otherthing";
 
 import something from "@server/something";
-
 import component from "@ui/hello";
-
 import a from "a";
 import c from "c";
 // I am stick to third party comment
@@ -258,10 +252,8 @@ import otherthing from "@core/otherthing";
 
 import qwerty from "@server/qwerty";
 import something from "@server/something";
-
 import component from "@ui/hello";
 import xyz from "@ui/xyz";
-
 import fourLevelRelativePath from "../../../../fourLevelRelativePath";
 import twoLevelRelativePath from "../../twoLevelRelativePath";
 
@@ -286,9 +278,7 @@ import abc from "@core/abc";
 import otherthing from "@core/otherthing";
 
 import something from "@server/something";
-
 import component from "@ui/hello";
-
 import fourLevelRelativePath from "../../../../fourLevelRelativePath";
 // I am comment
 import twoLevelRelativePath from "../../twoLevelRelativePath";

@@ -23,6 +23,7 @@ test('it should remove nodes from the original code', () => {
         importOrder: [],
         importOrderCaseInsensitive: false,
         importOrderSeparation: false,
+        importOrderSeparationGroups: [],
         importOrderGroupNamespaceSpecifiers: false,
         importOrderSortSpecifiers: false,
     });

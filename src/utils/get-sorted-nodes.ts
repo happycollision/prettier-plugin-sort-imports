@@ -1,5 +1,5 @@
 import { addComments, removeComments } from '@babel/types';
-import { clone, isEqual } from 'lodash';
+import { clone, isEqual, zip } from 'lodash';
 
 import { THIRD_PARTY_MODULES_SPECIAL_WORD, newLineNode } from '../constants';
 import { naturalSort } from '../natural-sort';
@@ -17,7 +17,7 @@ import { getSortedNodesGroup } from './get-sorted-nodes-group';
 export const getSortedNodes: GetSortedNodes = (nodes, options) => {
     naturalSort.insensitive = options.importOrderCaseInsensitive;
 
-    let { importOrder } = options;
+    let { importOrder, importOrderSeparationGroups } = options;
     const {
         importOrderSeparation,
         importOrderSortSpecifiers,
@@ -27,8 +27,16 @@ export const getSortedNodes: GetSortedNodes = (nodes, options) => {
     const originalNodes = nodes.map(clone);
     const finalNodes: ImportOrLine[] = [];
 
+    if (importOrderSeparationGroups.length === 0) {
+        importOrderSeparationGroups = [...importOrder];
+    }
+
     if (!importOrder.includes(THIRD_PARTY_MODULES_SPECIAL_WORD)) {
         importOrder = [THIRD_PARTY_MODULES_SPECIAL_WORD, ...importOrder];
+        importOrderSeparationGroups = [
+            THIRD_PARTY_MODULES_SPECIAL_WORD,
+            ...importOrderSeparationGroups,
+        ];
     }
 
     const importOrderGroups = importOrder.reduce<ImportGroups>(
@@ -44,7 +52,12 @@ export const getSortedNodes: GetSortedNodes = (nodes, options) => {
         importOrderGroups[matchedGroup].push(node);
     }
 
-    for (const group of importOrder) {
+    for (const [group, thisGroupName, nextGroupName] of zip(
+        importOrder,
+        importOrderSeparationGroups,
+        importOrderSeparationGroups.slice(1),
+    )) {
+        if (!group) continue;
         const groupNodes = importOrderGroups[group];
 
         if (groupNodes.length === 0) continue;
@@ -63,7 +76,9 @@ export const getSortedNodes: GetSortedNodes = (nodes, options) => {
         finalNodes.push(...sortedInsideGroup);
 
         if (importOrderSeparation) {
-            finalNodes.push(newLineNode);
+            if (thisGroupName !== nextGroupName) {
+                finalNodes.push(newLineNode);
+            }
         }
     }
 

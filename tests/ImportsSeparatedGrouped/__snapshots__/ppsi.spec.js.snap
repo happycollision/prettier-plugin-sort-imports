@@ -30,7 +30,6 @@ import x from "x";
 import otherthing from "@core/otherthing";
 
 import something from "@server/something";
-
 import component from "@ui/hello";
 
 import fourLevelRelativePath from "../../../../fourLevelRelativePath";
@@ -144,7 +143,6 @@ import otherthing from "@core/otherthing";
 
 import qwerty from "@server/qwerty";
 import something from "@server/something";
-
 import component from "@ui/hello";
 import xyz from "@ui/xyz";
 
@@ -271,7 +269,6 @@ import x from "x";
 import otherthing from "@core/otherthing";
 
 import something from "@server/something";
-
 import component from "@ui/hello";
 
 import fourLevelRelativePath from "../../../../fourLevelRelativePath";
@@ -323,7 +320,6 @@ import otherthing from "@core/otherthing";
 
 import qwerty from "@server/qwerty";
 import something from "@server/something";
-
 import component from "@ui/hello";
 import xyz from "@ui/xyz";
 
@@ -351,7 +347,6 @@ import abc from "@core/abc";
 import otherthing from "@core/otherthing";
 
 import something from "@server/something";
-
 import component from "@ui/hello";
 
 import fourLevelRelativePath from "../../../../fourLevelRelativePath";

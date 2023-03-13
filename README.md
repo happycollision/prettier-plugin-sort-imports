@@ -7,28 +7,12 @@ A prettier plugin to sort import declarations by provided Regular Expression ord
 ### Input
 
 ```javascript
-import React, {
-    FC,
-    useEffect,
-    useRef,
-    ChangeEvent,
-    KeyboardEvent,
-} from 'react';
+import { initializeApp } from '@core/app';
 import { logger } from '@core/logger';
-import { reduce, debounce } from 'lodash';
-import { Message } from '../Message';
+import { createConnection } from '@server/database';
 import { createServer } from '@server/node';
 import { Alert } from '@ui/Alert';
-import { repeat, filter, add } from '../utils';
-import { initializeApp } from '@core/app';
 import { Popup } from '@ui/Popup';
-import { createConnection } from '@server/database';
-```
-
-
-### Output
-
-```javascript
 import { debounce, reduce } from 'lodash';
 import React, {
     ChangeEvent,
@@ -38,14 +22,27 @@ import React, {
     useRef,
 } from 'react';
 
-import { createConnection } from '@server/database';
-import { createServer } from '@server/node';
+import { Message } from '../Message';
+import { add, filter, repeat } from '../utils';
+```
 
+### Output
+
+```javascript
 import { initializeApp } from '@core/app';
 import { logger } from '@core/logger';
-
+import { createConnection } from '@server/database';
+import { createServer } from '@server/node';
 import { Alert } from '@ui/Alert';
 import { Popup } from '@ui/Popup';
+import { debounce, reduce } from 'lodash';
+import React, {
+    ChangeEvent,
+    FC,
+    KeyboardEvent,
+    useEffect,
+    useRef,
+} from 'react';
 
 import { Message } from '../Message';
 import { add, filter, repeat } from '../utils';
@@ -117,6 +114,24 @@ between sorted import declarations group. The separation takes place according t
 ```
 "importOrderSeparation": true,
 ```
+
+#### `importOrderSeparationGroups`
+
+**type**: `Array<string>`
+
+**default value**: undefined
+
+An array of strings that allows you to control which groups have new lines separating them, and which do not.
+
+If you set `importOrderSeparation` to `true` and you choose to supply this array as well, it will create new lines only between group names that change.
+
+```
+"importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"]
+"importOrderSeparation": true,
+"importOrderSeparationGroups": "core", "serverAndUi", "serverAndUi", "relative",
+```
+
+In the example above, there will be no new line between imports that match `^@server/(.*)$` or `^@ui/(.*)$`, since the corresponding name for each of those regular expressions are both `"serverAndUi"`.
 
 #### `importOrderSortSpecifiers`
 
@@ -213,7 +228,7 @@ Having some trouble or an issue ? You can check [FAQ / Troubleshooting section](
 | React                  | ✅ Everything            | -                                                |
 | Angular                | ✅ Everything            | Supported through `importOrderParserPlugins` API |
 | Vue                    | ✅ Everything            | `@vue/compiler-sfc` is required                  |
-| Svelte                 | ⚠️ Soon to be supported.  | Any contribution is welcome.                     |
+| Svelte                 | ⚠️ Soon to be supported. | Any contribution is welcome.                     |
 
 ### Used by
 

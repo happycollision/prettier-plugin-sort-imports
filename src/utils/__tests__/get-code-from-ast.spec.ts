@@ -23,6 +23,7 @@ import a from 'a';
         importOrder: [],
         importOrderCaseInsensitive: false,
         importOrderSeparation: false,
+        importOrderSeparationGroups: [],
         importOrderGroupNamespaceSpecifiers: false,
         importOrderSortSpecifiers: false,
     });
